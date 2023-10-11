@@ -1,15 +1,29 @@
-import { fastify } from "fastify"
+import Fastify from "fastify"
+import { DatabaseMemory } from "./database-memory.js"
 
-const server = fastify()
-
-server.get("/", () => {
-  return "Hello World"
+const fastify = Fastify({
+  logger: true,
 })
 
-server.get("/fastify", () => {
-  return "Hello Fastify"
+const database = new DatabaseMemory()
+
+fastify.get("/listClients", (request, reply) => {
+  return reply.send(database.list())
 })
 
-server.listen({
-  port: 3000,
+fastify.post("/addClient", (request, reply) => {
+  database.create(request.body)
+
+  return reply.status(201).send()
 })
+
+const start = async () => {
+  try {
+    await fastify.listen({ port: 3333 })
+  } catch (err) {
+    fastify.log.error(err)
+    process.exit(1)
+  }
+}
+
+start()
