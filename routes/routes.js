@@ -12,6 +12,22 @@ const Routes = async (fastify, options) => {
 
     return reply.status(201).send()
   })
+
+  fastify.delete("/removeClient/:id", async (request, reply) => {
+    const clientId = request.params.id
+
+    database.delete(clientId)
+
+    return reply.status(200).send()
+  })
+
+  fastify.put("/updateClient/:id", async (request, reply) => {
+    const clientId = request.params.id
+
+    database.update(clientId, request.body)
+
+    return reply.status(200).send()
+  })
 }
 
 export default Routes
