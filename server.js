@@ -1,4 +1,5 @@
 import Fastify from "fastify"
+import cors from "@fastify/cors"
 
 import Routes from "./routes/routes.js"
 
@@ -7,6 +8,11 @@ const fastify = Fastify({
 })
 
 fastify.register(Routes)
+fastify.register(cors, {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+})
 
 fastify.listen({ port: 3333, host: "127.0.0.1" }, (err, address) => {
   if (err) {
