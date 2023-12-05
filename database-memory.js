@@ -1,31 +1,31 @@
 import { randomUUID } from "crypto"
 
 export class DatabaseMemory {
-  #clients = new Map()
+  #leads = new Map()
 
   list() {
-    return Array.from(this.#clients.entries()).map((elem) => {
-      const clientId = elem[0]
-      const clientData = elem[1]
+    return Array.from(this.#leads.entries()).map((elem) => {
+      const leadId = elem[0]
+      const leadData = elem[1]
 
       return {
-        clientId,
-        clientData,
+        leadId,
+        leadData,
       }
     })
   }
 
-  create(client) {
-    const clientId = randomUUID()
+  create(lead) {
+    const leadId = randomUUID()
 
-    this.#clients.set(clientId, client)
+    this.#leads.set(leadId, lead)
   }
 
-  update(id, client) {
-    this.#clients.set(id, client)
+  update(id, lead) {
+    this.#leads.set(id, lead)
   }
 
   delete(id) {
-    this.#clients.delete(id)
+    this.#leads.delete(id)
   }
 }

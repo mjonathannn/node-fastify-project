@@ -3,28 +3,28 @@ import { DatabaseMemory } from "../database-memory.js"
 const Routes = async (fastify, options) => {
   const database = new DatabaseMemory()
 
-  fastify.get("/listClients", async (request, reply) => {
+  fastify.get("/readLeads", async (request, reply) => {
     return reply.send(database.list())
   })
 
-  fastify.post("/addClient", async (request, reply) => {
+  fastify.post("/createLead", async (request, reply) => {
     database.create(request.body)
 
     return reply.status(201).send()
   })
 
-  fastify.delete("/removeClient/:id", async (request, reply) => {
-    const clientId = request.params.id
+  fastify.delete("/deleteLead/:id", async (request, reply) => {
+    const leadId = request.params.id
 
-    database.delete(clientId)
+    database.delete(leadId)
 
     return reply.status(200).send()
   })
 
-  fastify.put("/updateClient/:id", async (request, reply) => {
-    const clientId = request.params.id
+  fastify.put("/updateLead/:id", async (request, reply) => {
+    const leadId = request.params.id
 
-    database.update(clientId, request.body)
+    database.update(leadId, request.body)
 
     return reply.status(200).send()
   })
