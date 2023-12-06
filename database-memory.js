@@ -3,7 +3,7 @@ import { randomUUID } from "crypto"
 export class DatabaseMemory {
   #leads = new Map([
     [
-      randomUUID(),
+      "823.684.590-73",
       {
         cpf: "823.684.590-73",
         name: "João da Silva",
@@ -14,7 +14,7 @@ export class DatabaseMemory {
       },
     ],
     [
-      randomUUID(),
+      "235.713.720-77",
       {
         cpf: "235.713.720-77",
         name: "Márcio dos Santos",
@@ -39,7 +39,7 @@ export class DatabaseMemory {
   }
 
   create(lead) {
-    const leadId = randomUUID()
+    const leadId = lead.cpf
 
     this.#leads.set(leadId, lead)
   }
